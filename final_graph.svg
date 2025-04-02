@@ -3,7 +3,7 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1097.8)">
 <title>%0</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1097.8 1096.1745,-1097.8 1096.1745,4 -4,4"/>
-<text text-anchor="middle" x="546.0872" y="-8.2" font-family="Times,serif" font-size="14.00" fill="#000000">North-South Train Problem: Finite State Machine</text>
+<text text-anchor="middle" x="546.0872" y="-8.2" font-family="Times,serif" font-size="14.00" fill="#000000">North-South Train Problem: Mealy-Type Finite State Machine</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>

@@ -1,8 +1,6 @@
 // North-South Train Problem Finite State Machine
-// I rendered this with edotor.net DOT engine (graphviz)
-
 digraph {
-	graph [label="North-South Train Problem: Finite State Machine"]
+	graph [label="North-South Train Problem: Mealy-Type Finite State Machine"]
 
 	Start [pos="0,0!" shape=point]
 	"Default State" #[pos="3,0!" shape=circle]
