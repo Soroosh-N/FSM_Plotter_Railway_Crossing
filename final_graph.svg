@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1100pt" height="1102pt" viewBox="0.00 0.00 1100.17 1101.80">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1097.8)">
+<title>%0</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-1097.8 1096.1745,-1097.8 1096.1745,4 -4,4"/>
+<text text-anchor="middle" x="546.0872" y="-8.2" font-family="Times,serif" font-size="14.00" fill="#000000">North-South Train Problem: Finite State Machine</text>
+<!-- Start -->
+<g id="node1" class="node">
+<title>Start</title>
+<ellipse fill="#000000" stroke="#000000" cx="426.2688" cy="-1039.4" rx="1.8" ry="1.8"/>
+</g>
+<!-- Default State -->
+<g id="node2" class="node">
+<title>Default State</title>
+<ellipse fill="none" stroke="#000000" cx="426.2688" cy="-897.4" rx="61.9311" ry="18"/>
+<text text-anchor="middle" x="426.2688" y="-893.2" font-family="Times,serif" font-size="14.00" fill="#000000">Default State</text>
+</g>
+<!-- Start&#45;&gt;Default State -->
+<g id="edge1" class="edge">
+<title>Start-&gt;Default State</title>
+<path fill="none" stroke="#000000" d="M426.2688,-1037.3926C426.2688,-1025.4577 426.2688,-963.0873 426.2688,-925.7412"/>
+<polygon fill="#000000" stroke="#000000" points="429.7689,-925.4857 426.2688,-915.4858 422.7689,-925.4858 429.7689,-925.4857"/>
+<text text-anchor="start" x="426.2688" y="-954.4" font-family="Times,serif" font-size="14.00" fill="#000000">timer := 0</text>
+<text text-anchor="middle" x="454.7119" y="-937.6" font-family="Times,serif" font-size="14.00" fill="#000000">trains := 0</text>
+</g>
+<!-- Alarm State -->
+<g id="node3" class="node">
+<title>Alarm State</title>
+<ellipse fill="none" stroke="#000000" cx="426.2688" cy="-649" rx="108" ry="144"/>
+<text text-anchor="middle" x="426.2688" y="-644.8" font-family="Times,serif" font-size="14.00" fill="#000000">Alarm State</text>
+</g>
+<!-- Default State&#45;&gt;Alarm State -->
+<g id="edge2" class="edge">
+<title>Default State-&gt;Alarm State</title>
+<path fill="none" stroke="#0000ff" d="M364.52,-896.383C257.1101,-893.9686 45.1067,-886.0968 22.514,-861.4 -72.338,-757.7144 158.2226,-695.7269 308.6954,-667.4425"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="309.7404,-670.8086 318.9359,-665.5461 308.4657,-663.9256 309.7404,-670.8086"/>
+<text text-anchor="middle" x="214.1462" y="-848.8" font-family="Times,serif" font-size="14.00" fill="#0000ff">(northbound_approach) ∨ (southbound_approach) / (alarm_enable)</text>
+<text text-anchor="middle" x="214.1462" y="-832" font-family="Times,serif" font-size="14.00" fill="#0000ff">timer := 0</text>
+<text text-anchor="middle" x="214.1462" y="-815.2" font-family="Times,serif" font-size="14.00" fill="#0000ff">trains := 1</text>
+</g>
+<!-- Default State&#45;&gt;Alarm State -->
+<g id="edge3" class="edge">
+<title>Default State-&gt;Alarm State</title>
+<path fill="none" stroke="#0000ff" d="M426.2688,-879.1346C426.2688,-861.7455 426.2688,-833.752 426.2688,-803.1811"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="429.7689,-803.175 426.2688,-793.1751 422.7689,-803.1751 429.7689,-803.175"/>
+<text text-anchor="middle" x="617.1462" y="-848.8" font-family="Times,serif" font-size="14.00" fill="#0000ff">(northbound_approach) ∧ (southbound_approach) / (alarm_enable)</text>
+<text text-anchor="middle" x="617.1462" y="-832" font-family="Times,serif" font-size="14.00" fill="#0000ff">timer := 0</text>
+<text text-anchor="middle" x="617.1462" y="-815.2" font-family="Times,serif" font-size="14.00" fill="#0000ff">trains := 2</text>
+</g>
+<!-- Alarm State&#45;&gt;Default State -->
+<g id="edge7" class="edge">
+<title>Alarm State:ne-&gt;Default State</title>
+<path fill="none" stroke="#007700" d="M513.2688,-736C609.2323,-831.9635 725.9195,-703.8979 809.2688,-811 823.026,-828.6777 824.3487,-844.8362 809.2688,-861.4 788.791,-883.8929 603.4886,-892.6037 498.3288,-895.7571"/>
+<polygon fill="#007700" stroke="#007700" points="497.9933,-892.2652 488.099,-896.0539 498.1964,-899.2623 497.9933,-892.2652"/>
+<text text-anchor="start" x="819.2688" y="-840.4" font-family="Times,serif" font-size="14.00" fill="#007700">(timer ≥ 10) ∧ (trains == 0) / alarm_disable</text>
+<text text-anchor="middle" x="946.5169" y="-823.6" font-family="Times,serif" font-size="14.00" fill="#007700">timer:=0</text>
+</g>
+<!-- Alarm State&#45;&gt;Alarm State -->
+<g id="edge4" class="edge">
+<title>Alarm State:w-&gt;Alarm State</title>
+<path fill="none" stroke="#ff0000" d="M318.2688,-649C312.2688,-693.5 300.2688,-693.5 300.2688,-649 300.2688,-639.0429 304.4744,-631.3138 311.474,-625.8126"/>
+<polygon fill="#ff0000" stroke="#ff0000" points="313.2692,-628.8172 320.0991,-620.7176 309.709,-622.7902 313.2692,-628.8172"/>
+<text text-anchor="middle" x="253.8819" y="-653.2" font-family="Times,serif" font-size="14.00" fill="#ff0000">clock /</text>
+<text text-anchor="middle" x="253.8819" y="-636.4" font-family="Times,serif" font-size="14.00" fill="#ff0000">timer:=timer + 1</text>
+</g>
+<!-- Alarm State&#45;&gt;Alarm State -->
+<g id="edge5" class="edge">
+<title>Alarm State-&gt;Alarm State</title>
+<path fill="none" stroke="#0000ff" d="M532.4385,-677.2824C544.4707,-671.9861 552.2688,-662.5586 552.2688,-649 552.2688,-639.0429 548.0632,-631.3138 541.0636,-625.8126"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="542.8286,-622.7902 532.4385,-620.7176 539.2684,-628.8172 542.8286,-622.7902"/>
+<text text-anchor="start" x="552.2688" y="-653.2" font-family="Times,serif" font-size="14.00" fill="#0000ff">(northbound_approach) ∨ (southbound_approach) /</text>
+<text text-anchor="middle" x="699.0329" y="-636.4" font-family="Times,serif" font-size="14.00" fill="#0000ff">trains:=trains + 1</text>
+</g>
+<!-- Barrier State -->
+<g id="node4" class="node">
+<title>Barrier State</title>
+<ellipse fill="none" stroke="#000000" cx="426.2688" cy="-291.4" rx="108" ry="144"/>
+<text text-anchor="middle" x="426.2688" y="-287.2" font-family="Times,serif" font-size="14.00" fill="#000000">Barrier State</text>
+</g>
+<!-- Alarm State&#45;&gt;Barrier State -->
+<g id="edge6" class="edge">
+<title>Alarm State-&gt;Barrier State</title>
+<path fill="none" stroke="#007700" d="M338.8581,-563.7986C320.5474,-540.7665 303.8298,-514.5311 294.0192,-487 279.6884,-446.7839 298.9077,-406.9156 326.7502,-373.7685"/>
+<polygon fill="#007700" stroke="#007700" points="329.6557,-375.7626 333.6,-365.9293 324.3845,-371.1567 329.6557,-375.7626"/>
+<text text-anchor="start" x="294.2688" y="-474.4" font-family="Times,serif" font-size="14.00" fill="#007700">(timer ≥ 10) ∧ (trains &gt; 0) / barrier_lower</text>
+<text text-anchor="middle" x="416.3936" y="-457.6" font-family="Times,serif" font-size="14.00" fill="#007700">timer:=0</text>
+</g>
+<!-- Barrier State&#45;&gt;Alarm State -->
+<g id="edge11" class="edge">
+<title>Barrier State-&gt;Alarm State</title>
+<path fill="none" stroke="#007700" d="M512.6716,-378.1925C535.0909,-410.8669 550.041,-449.2714 538.2688,-487 532.1859,-506.4948 522.845,-525.7111 512.0974,-543.7176"/>
+<polygon fill="#007700" stroke="#007700" points="508.9797,-542.1057 506.7164,-552.456 514.9402,-545.7762 508.9797,-542.1057"/>
+<text text-anchor="start" x="542.2688" y="-474.4" font-family="Times,serif" font-size="14.00" fill="#007700">trains = 0 / barrier_raise</text>
+<text text-anchor="middle" x="609.5752" y="-457.6" font-family="Times,serif" font-size="14.00" fill="#007700">timer:=0</text>
+</g>
+<!-- Barrier State&#45;&gt;Barrier State -->
+<g id="edge8" class="edge">
+<title>Barrier State:sw-&gt;Barrier State:nw</title>
+<path fill="none" stroke="#ff0000" d="M339.2688,-204.4C312.2688,-159.9 300.2688,-159.9 300.2688,-291.4 300.2688,-413.6539 310.6406,-422.2499 333.7949,-387.0965"/>
+<polygon fill="#ff0000" stroke="#ff0000" points="336.9039,-388.7275 339.2688,-378.4 330.9797,-384.9986 336.9039,-388.7275"/>
+<text text-anchor="start" x="61.531" y="-295.6" font-family="Times,serif" font-size="14.00" fill="#ff0000">northbound_depart ∨ southbound_depart/</text>
+<text text-anchor="middle" x="180.8999" y="-278.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">trains:=trains - 1</text>
+</g>
+<!-- Barrier State&#45;&gt;Barrier State -->
+<g id="edge9" class="edge">
+<title>Barrier State:s-&gt;Barrier State:s</title>
+<path fill="none" stroke="#ff0000" d="M426.2688,-147.4C435.2688,-117.7333 435.2688,-58.4 426.2688,-58.4 418.1829,-58.4 417.3616,-106.2933 423.8051,-137.5361"/>
+<polygon fill="#ff0000" stroke="#ff0000" points="420.4498,-138.5462 426.2688,-147.4 427.2412,-136.8499 420.4498,-138.5462"/>
+<text text-anchor="start" x="306.8999" y="-45.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">northbound_depart ∧ southbound_depart/</text>
+<text text-anchor="middle" x="426.2688" y="-29" font-family="Times,serif" font-size="14.00" fill="#ff0000">trains:=trains - 2</text>
+</g>
+<!-- Barrier State&#45;&gt;Barrier State -->
+<g id="edge10" class="edge">
+<title>Barrier State-&gt;Barrier State</title>
+<path fill="none" stroke="#0000ff" d="M532.4385,-319.6824C544.4707,-314.3861 552.2688,-304.9586 552.2688,-291.4 552.2688,-281.4429 548.0632,-273.7138 541.0636,-268.2126"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="542.8286,-265.1902 532.4385,-263.1176 539.2684,-271.2172 542.8286,-265.1902"/>
+<text text-anchor="start" x="552.2688" y="-295.6" font-family="Times,serif" font-size="14.00" fill="#0000ff">(northbound_approach) ∨ (southbound_approach) /</text>
+<text text-anchor="middle" x="699.0329" y="-278.8" font-family="Times,serif" font-size="14.00" fill="#0000ff">trains:=trains + 1</text>
+</g>
+<!-- Inputs -->
+<g id="node5" class="node">
+<title>Inputs</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="585.9089,-1093.7002 446.6287,-1093.7002 446.6287,-985.0998 585.9089,-985.0998 585.9089,-1093.7002"/>
+<text text-anchor="start" x="454.449" y="-1077.2" font-family="Times,serif" font-size="14.00" fill="#000000">Inputs:</text>
+<text text-anchor="start" x="454.449" y="-1060.4" font-family="Times,serif" font-size="14.00" fill="#000000">northbound_approach</text>
+<text text-anchor="start" x="454.449" y="-1043.6" font-family="Times,serif" font-size="14.00" fill="#000000">southbound_approach</text>
+<text text-anchor="start" x="454.449" y="-1026.8" font-family="Times,serif" font-size="14.00" fill="#000000">northbound_depart</text>
+<text text-anchor="start" x="454.449" y="-1010" font-family="Times,serif" font-size="14.00" fill="#000000">southbound_depart</text>
+<text text-anchor="middle" x="516.2688" y="-993.2" font-family="Times,serif" font-size="14.00" fill="#000000">clock</text>
+</g>
+<!-- Outputs -->
+<g id="node6" class="node">
+<title>Outputs</title>
+<polygon fill="#add8e6" stroke="#000000" points="698.296,-1085.4 604.2416,-1085.4 604.2416,-993.4 698.296,-993.4 698.296,-1085.4"/>
+<text text-anchor="start" x="612.0058" y="-1068.8" font-family="Times,serif" font-size="14.00" fill="#000000">Outputs:</text>
+<text text-anchor="start" x="612.0058" y="-1052" font-family="Times,serif" font-size="14.00" fill="#000000">alarm_enable</text>
+<text text-anchor="start" x="612.0058" y="-1035.2" font-family="Times,serif" font-size="14.00" fill="#000000">alarm_disable</text>
+<text text-anchor="start" x="612.0058" y="-1018.4" font-family="Times,serif" font-size="14.00" fill="#000000">barrier_lower</text>
+<text text-anchor="middle" x="651.2688" y="-1001.6" font-family="Times,serif" font-size="14.00" fill="#000000">barrier_raise</text>
+</g>
+<!-- Variables -->
+<g id="node7" class="node">
+<title>Variables</title>
+<polygon fill="none" stroke="#000000" points="912.1185,-1068.8014 716.4191,-1068.8014 716.4191,-1009.9986 912.1185,-1009.9986 912.1185,-1068.8014"/>
+<text text-anchor="start" x="724.344" y="-1052" font-family="Times,serif" font-size="14.00" fill="#000000">Variables:</text>
+<text text-anchor="start" x="724.344" y="-1035.2" font-family="Times,serif" font-size="14.00" fill="#000000">timer: Timer Counter {0...10}</text>
+<text text-anchor="middle" x="814.2688" y="-1018.4" font-family="Times,serif" font-size="14.00" fill="#000000">trains: Train Counter {0, 1, 2...}</text>
+</g>
+<!-- Assumptions -->
+<g id="node8" class="node">
+<title>Assumptions</title>
+<polygon fill="none" stroke="#000000" points="1092.0803,-1068.8014 930.4573,-1068.8014 930.4573,-1009.9986 1092.0803,-1009.9986 1092.0803,-1068.8014"/>
+<text text-anchor="start" x="938.3631" y="-1052" font-family="Times,serif" font-size="14.00" fill="#000000">Assumptions:</text>
+<text text-anchor="start" x="938.3631" y="-1035.2" font-family="Times,serif" font-size="14.00" fill="#000000">Alarm is disabled initially</text>
+<text text-anchor="middle" x="1011.2688" y="-1018.4" font-family="Times,serif" font-size="14.00" fill="#000000">Barrier is raised initially</text>
+</g>
+</g>
+</svg>

@@ -1,0 +1,29 @@
+// North-South Train Problem Finite State Machine
+digraph {
+	graph [label="North-South Train Problem Finite State Machine"]
+	splines=curved
+	Start [pos="0,0!" shape=point]
+	"Default State" [pos="3,0!" shape=circle]
+	"Alarm State" [pos="9,0!" shape=circle]
+	"Barrier State" [pos="12,-4!" shape=circle]
+	Start -> "Default State" [label="timer := 0\ltrains := 0" color="#000000" fontcolor="#000000"]
+	"Default State" -> "Alarm State" [label="(northbound_approach) ∨ (southbound_approach) / (Alarm ✓)
+timer := 0
+trains := 1" color="#000000" fontcolor="#000000"]
+	"Alarm State" -> "Alarm State" [label="timer++
+(Time-Triggered Interruption)	" color="#ff0000" fontcolor="#ff0000"]
+	"Alarm State" -> "Alarm State" [label="(northbound_approach) ∨ (southbound_approach) / trains++
+(Event-Triggered Interruption)	" color="#0000ff" fontcolor="#0000ff"]
+	"Alarm State" -> "Barrier State" [label="(timer ≥ 10) / (Barrier ✓)" color="#000000" fontcolor="#000000"]
+	"Barrier State" -> "Barrier State" [label="(N_D) / -		
+trains--" color="#ff0000" fontcolor="#ff0000"]
+	"Barrier State" -> "Barrier State" [label="(S_D) / -		
+trains--" color="#0000ff" fontcolor="#0000ff"]
+	"Barrier State" -> "Barrier State" [label="(northbound_approach) / -		
+trains++" color="#007700" fontcolor="#007700"]
+	"Barrier State" -> "Barrier State" [label="(southbound_approach) / -		
+trains++" color="#000000" fontcolor="#000000"]
+	Inputs [label="Inputs:\lnorthbound_approach\lsouthbound_approach\lnorthbound_depart\lsouthbound_depart\lclock" fillcolor=lightgray pos="-5,3!" shape=box style=filled]
+	Outputs [label="Outputs:\lalarm_enable\lalarm_disable\lbarrier_lower\lbarrier_raise" fillcolor=lightblue pos="-5,0!" shape=box style=filled]
+	Variables [label="Variables:\ltimer: Timer Counter\ltrains: Train Counter" fillcolor=lightgreen pos="-5,-3!" shape=box style=filled]
+}

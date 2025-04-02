@@ -1,0 +1,36 @@
+// North-South Train Problem Finite State Machine
+// I rendered this with edotor.net DOT engine (graphviz)
+
+digraph {
+	graph [label="North-South Train Problem: Finite State Machine"]
+
+	Start [pos="0,0!" shape=point]
+	"Default State" #[pos="3,0!" shape=circle]
+	"Alarm State" [height=4, width=3] #[pos="9,0!" shape=circle]
+	"Barrier State" [height=4 width=3] #[pos="12,-4!" shape=circle]
+
+	Start -> "Default State" [label="timer := 0\ltrains := 0" color="#000000" fontcolor="#000000"]
+	
+	"Default State" -> "Alarm State" [label="(northbound_approach) ∨ (southbound_approach) / (alarm_enable)\ntimer := 0\ntrains := 1"  color="#0000FF" fontcolor="#0000FF"];
+	"Default State" -> "Alarm State" [label="(northbound_approach) ∧ (southbound_approach) / (alarm_enable)\ntimer := 0\ntrains := 2" color="#0000FF" fontcolor="#0000FF"];
+
+
+	"Alarm State" -> "Alarm State" [label="clock /\ntimer:=timer + 1" color="#ff0000" fontcolor="#ff0000" tailport=w]
+	"Alarm State" -> "Alarm State" [label="(northbound_approach) ∨ (southbound_approach) /\ltrains:=trains + 1" color="#0000ff" fontcolor="#0000ff"]
+
+	"Alarm State" -> "Barrier State" [label="(timer ≥ 10) ∧ (trains > 0) / barrier_lower\ltimer:=0" color="#007700" fontcolor="#007700"]
+
+	"Alarm State" -> "Default State" [label="(timer ≥ 10) ∧ (trains == 0) / alarm_disable\ltimer:=0" tailport=ne color="#007700" fontcolor="#007700"]
+
+
+	"Barrier State" -> "Barrier State" [label="northbound_depart ∨ southbound_depart/\ltrains:=trains - 1" color="#ff0000" fontcolor="#ff0000" headport=nw tailport=sw];
+	"Barrier State" -> "Barrier State" [label="northbound_depart ∧ southbound_depart/\ltrains:=trains - 2" color="#ff0000" fontcolor="#ff0000" headport=s tailport=s];
+	"Barrier State" -> "Barrier State" [label="(northbound_approach) ∨ (southbound_approach) /\ltrains:=trains + 1" color="#0000FF" fontcolor="#0000FF"]
+	"Barrier State" -> "Alarm State" [label="trains = 0 / barrier_raise\ltimer:=0"  color="#007700" fontcolor="#007700"]
+
+
+	Inputs [label="Inputs:\lnorthbound_approach\lsouthbound_approach\lnorthbound_depart\lsouthbound_depart\lclock" fillcolor=lightgray pos="-5,3!" shape=box style=filled]
+	Outputs [label="Outputs:\lalarm_enable\lalarm_disable\lbarrier_lower\lbarrier_raise" fillcolor=lightblue pos="-5,0!" shape=box style=filled]
+	Variables [label="Variables:\ltimer: Timer Counter {0...10}\ltrains: Train Counter {0, 1, 2...}" fillcolor=lightgreen pos="-5,-3!" shape=box]
+	Assumptions [label="Assumptions:\lAlarm is disabled initially\lBarrier is raised initially" shape=box]
+}

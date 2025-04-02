@@ -5,15 +5,7 @@ if __name__ == '__main__':
     dot.engine = "neato"
     dot.attr(splines="curved")
     dot.graph_attr['label'] = '' \
-    'North-South Train Problem Finite State Machine\n' \
-    '\nS_A: South Train Approaching' \
-    '\nN_A: North Train Approaching' \
-    '\nS_D: South Train Departing' \
-    '\nN_D: North Train Departing' \
-    '\nCNT: Timer Counter' \
-    '\nT_CNT: Train Counter' \
-    '\n++: Increase by 1' \
-    '\n--: Decrease by 1'
+    'North-South Train Problem Finite State Machine'
 
     AND = "\u2227"      # Logical And
     OR = "\u2228"       # Logical OR
@@ -21,7 +13,7 @@ if __name__ == '__main__':
     WRONG = "\u2716"    # Wrong mark sign
     LE = "\u2264"       # LESS-THAN OR EQUAL TO
     GE = "\u2265"       # GREATER-THAN OR EQUAL TO
-    RST_C = "CNT := 0"  # Reset Counter
+    RST_C = "timer := 0"  # Reset Counter
 
     BLK = "#000000"
     RED = "#ff0000"
@@ -29,17 +21,17 @@ if __name__ == '__main__':
     BLU = "#0000ff"
 
     st0 = f"Start"
-    st1 = f"Alarm {WRONG}\nBarrier {WRONG}"
-    st2 = f"Alarm {CHECK}\nBarrier {WRONG}\n(Train arriving)"
-    st3 = f"Alarm {CHECK}\nBarrier {CHECK}"
-    st4 = f"Alarm {CHECK}\nBarrier {WRONG}\n(Train leaving)"
+    st1 = f"Default State"
+    st2 = f"Alarm State"
+    st3 = f"Barrier State"
+   # st4 = f"Alarm {CHECK}\nBarrier {WRONG}\n(Train leaving)"
 
     nodes = {
         (st0, "point"): "0,0!",
         (st1, "circle"): "3,0!",
         (st2, "circle"): "9,0!",
-        (st3, "circle"): "9,-4!",
-        (st4, "circle"): "3,-4!",
+        (st3, "circle"): "12,-4!",
+#        (st4, "circle"): "3,-4!",
     }
 
     # Nodes
@@ -47,23 +39,35 @@ if __name__ == '__main__':
         dot.node(node, shape=shape, pos=position)
 
     edges = {
-        (st0, st1, f"{RST_C}\nT_CNT := 0"): BLK,
-        (st1, st2, f"(N_A) {OR} (S_A) / (Alarm {CHECK})\n{RST_C}\nT_CNT := 1"): BLK,
-        (st2, st2, f"CNT++\n(Time-Triggered Interruption)\t"): RED,
-        (st2, st2, f"(N_A) {OR} (S_A) / T_CNT++\n(Event-Triggered Interruption)\t"): BLU,
-        (st2, st3, f"(CNT {GE} 10) / (Barrier {CHECK})"): BLK,
-        (st3, st3, f"(N_D) / -\t\t\nT_CNT--"): RED,
-        (st3, st3, f"(S_D) / -\t\t\nT_CNT--"): BLU,
-        (st3, st3, f"(N_A) / -\t\t\nT_CNT++"): GRN,
-        (st3, st3, f"(S_A) / -\t\t\nT_CNT++"): BLK,
-        (st3, st4, f"T_CNT {LE} 0 / (Barrier {WRONG})\n{RST_C}"): BLK,
-        (st4, st4, f"CNT++"): RED,
-        (st4, st1, f"(CNT {GE} 10) / (Alarm {WRONG})\n{RST_C}"): BLK,
-        (st4, st2, f"(N_A) {OR} (S_A) / (T_CNT := 1)\n{RST_C}"): GRN,
+        (st0, st1, f"{RST_C}\ltrains := 0"): BLK,
+        (st1, st2, f"(northbound_approach) {OR} (southbound_approach) / (Alarm {CHECK})\n{RST_C}\ntrains := 1"): BLK,
+        (st2, st2, f"timer++\n(Time-Triggered Interruption)\t"): RED,
+        (st2, st2, f"(northbound_approach) {OR} (southbound_approach) / trains++\n(Event-Triggered Interruption)\t"): BLU,
+        (st2, st3, f"(timer {GE} 10) / (Barrier {CHECK})"): BLK,
+        (st3, st3, f"(N_D) / -\t\t\ntrains--"): RED,
+        (st3, st3, f"(S_D) / -\t\t\ntrains--"): BLU,
+        (st3, st3, f"(northbound_approach) / -\t\t\ntrains++"): GRN,
+        (st3, st3, f"(southbound_approach) / -\t\t\ntrains++"): BLK,
+        # (st3, st4, f"trains {LE} 0 / (Barrier {WRONG})\n{RST_C}"): BLK,
+        # (st4, st4, f"timer++"): RED,
+        # (st4, st1, f"(timer {GE} 10) / (Alarm {WRONG})\n{RST_C}"): BLK,
+        # (st4, st2, f"(northbound_approach) {OR} (southbound_approach) / (trains := 1)\n{RST_C}"): GRN,
     }
 
     # Edges
     for (first_node, next_node, lbl), CLR   in edges.items():
         dot.edge(first_node, next_node, label=lbl, color=CLR, fontcolor=CLR)
+
+        # Additional information nodes
+    dot.node("Inputs", "Inputs:\lnorthbound_approach\lsouthbound_approach\lnorthbound_depart\lsouthbound_depart\lclock",
+             shape="box", style="filled", fillcolor="lightgray", pos="-5,3!")
+
+    dot.node("Outputs", "Outputs:\lalarm_enable\lalarm_disable\lbarrier_lower\lbarrier_raise", 
+             shape="box", style="filled", fillcolor="lightblue", pos="-5,0!")
+
+    dot.node("Variables", "Variables:\ltimer: Timer Counter\ltrains: Train Counter", 
+             shape="box", style="filled", fillcolor="lightgreen", pos="-5,-3!")
     
+#    dot.node("Assumptions", )
+    dot.save(filename="fsm.dot")
     dot.render(filename="fsm", format="svg", view=True)
